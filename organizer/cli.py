@@ -15,7 +15,7 @@ def cli_arguments():
     parser.add_argument("--dry-run", action="store_true", help="Only display procedure", required=False)
     parser.add_argument("--by-date", action="store_true", help="Organization by date", required=False)
     parser.add_argument("--report", choices=["csv","json","txt","terminal"], 
-                        help="Organization by date", required=False)
+                        help="Organization report", required=False)
 
     # parsing of arguments
     arguments = parser.parse_args()
