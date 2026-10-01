@@ -1,8 +1,9 @@
+import organizer.cli as command_line
 from organizer.scanner import scan
 
 def main():
-    test_path = input("Enter the path of the file or folder to scan: ")
-    result = scan(test_path)
+    arguments = command_line.cli_arguments()
+    result = scan(arguments.path)
 
     """
     print("Scan result:")
