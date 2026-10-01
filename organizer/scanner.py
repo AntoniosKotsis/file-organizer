@@ -40,9 +40,11 @@ def scan_folder(path):
 
     print(f"Folder '{path}' contains {len(files)} files")
 
+    """
     for file in files:
         print(f"File: {file}")
-        
+    """
+         
     return files
 
 
