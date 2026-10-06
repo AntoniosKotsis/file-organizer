@@ -1,9 +1,28 @@
 """
-Parameter: filename, optional date: if by-date is enabled
-Returns: destination folder path for the file (e.g. 'Images', 'Images/2026/10')
-"""
+Parameter: file path, by_date
+Returns: destination folder path for the file (e.g. 'Images', 'Images/2026/October')
 
-import os
+1. Give the extensions for files 
+
+Case A: If by-date is unabled
+
+Parameter: file path, by_date = False
+
+A1. For each file, take its extension
+A2. Check if the extension is in the list of extensions for each category
+A3. If it is, return the category name as the destination folder path
+
+Case B: If by-date is enabled
+
+Parameter: file path, by_date = True
+
+B1. For each file, take its extension
+B2. Check if the extension is in the list of extensions for each category
+B3. If it is, return the category name as the destination folder path
+B4. Get the creation date of the file
+B5. Create a folder path based on the creation date (e.g. 'Images/2026/October')
+"""
+from pathlib import Path
 # for dates and hours
 from datetime import datetime
 
@@ -33,4 +52,6 @@ Categories = {
     "Other": []
 }
 
-#def classify_file(path):
+#def classify_file(path, by_date):
+    
+        
