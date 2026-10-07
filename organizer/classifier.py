@@ -30,7 +30,8 @@ from datetime import datetime
 Categories = {
     "Documents": [".txt", ".pdf", ".docx", ".doc", ".csv", ".pptx"],
     "Images": [".jpg", ".jpeg", ".png", ".gif", ".bnp", ".bsp"],
-    "Videos": [".mp3", ".mp4", ".wav", ".mov", ".avi"],
+    "Videos": [".mp4", ".mov", ".avi"],
+    "Audio": [".mp3", ".wav", ".flac"],
     "Archives": [".zip", ".rar", ".tar", ".iso", ".7z"],
     "Binaries": [".bin", ".dat"],
     "C": [".c", ".h"],
@@ -52,6 +53,45 @@ Categories = {
     "Other": []
 }
 
-#def classify_file(path, by_date):
-    
-        
+def classify_file(path):
+    """
+    Classify a file based on its extension and return the destination folder path
+    """
+
+    path = Path(path)
+
+    # Get the file extension in lowercase
+    extension = path.suffix.lower()
+
+    # Check if the extension is in any of the categories
+    for category, extensions in Categories.items():
+        if extension in extensions:
+            return category
+
+    # If the extension is not found in any category, return 'Other'
+    return "Other"
+
+def get_destination_folder(path, by_date = False):
+    """
+    Get the destination folder path for a file based on its extension and optionally its creation date.
+    """
+
+    category = classify_file(path)
+
+    if not by_date:
+        return category
+
+    # If by_date is True, get the creation date of the file
+
+    path = Path(path)
+
+    # Get the last modified time of the file (undecipherable format)
+    mtime = path.stat().st_mtime
+
+    # Convert the last modified time to a datetime object
+    date = datetime.fromtimestamp(mtime)
+
+    # Get the month from the datetime object in a human-readable format (e.g., 'October')
+    month = date.strftime("%B")
+
+    return str(Path(category) / str(date.year) / month)
